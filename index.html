@@ -38,6 +38,34 @@
             text-align: center;
             margin: 20px 0;
         }
+        .carousel {
+            position: relative;
+            max-width: 100%;
+            margin: auto;
+            overflow: hidden;
+        }
+        .carousel img {
+            width: 100%;
+            display: none;
+        }
+        .carousel img.active {
+            display: block;
+        }
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+        .carousel-controls span {
+            cursor: pointer;
+            font-size: 2em;
+            color: white;
+            padding: 0 10px;
+            user-select: none;
+        }
         .footer {
             background-color: #333;
             color: #fff;
@@ -67,6 +95,20 @@
 <div class="container" id="home">
     <h2 class="section-title">Welcome to Tunnel Boring Engineering Company</h2>
     <p>We specialize in providing advanced tunneling equipment and solutions, backed by years of engineering expertise and a professional technical team to support our clients comprehensively.</p>
+
+    <!-- Image Carousel -->
+    <div class="carousel">
+        <img src="machine1.jpg" alt="Tunnel Boring Machine 1" class="active">
+        <img src="machine2.jpg" alt="Tunnel Boring Machine 2">
+        <img src="machine3.jpg" alt="Tunnel Boring Machine 3">
+        <img src="machine4.jpg" alt="Tunnel Boring Machine 4">
+        
+        <!-- Controls -->
+        <div class="carousel-controls">
+            <span id="prev">&laquo;</span>
+            <span id="next">&raquo;</span>
+        </div>
+    </div>
 </div>
 
 <div class="container" id="about">
@@ -101,6 +143,23 @@
 <footer class="footer">
     <p>&copy; 2024 Tunnel Boring Engineering Company. All rights reserved.</p>
 </footer>
+
+<script>
+    const images = document.querySelectorAll('.carousel img');
+    let currentIndex = 0;
+
+    document.getElementById('next').onclick = () => {
+        images[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % images.length;
+        images[currentIndex].classList.add('active');
+    };
+
+    document.getElementById('prev').onclick = () => {
+        images[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        images[currentIndex].classList.add('active');
+    };
+</script>
 
 </body>
 </html>
